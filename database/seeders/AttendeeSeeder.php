@@ -19,7 +19,7 @@ class AttendeeSeeder extends Seeder
         $events = Event::all();
 
         foreach ($users as $user) {
-            $eventToAttend = $events->random(rand(1, 3));
+            $eventToAttend = $events->random(rand(1, 3)); //this will get random event with select 1 - 3
 
             foreach ($eventToAttend as $event) {
                 Attendee::create([
