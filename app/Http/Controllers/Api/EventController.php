@@ -21,7 +21,19 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $event = Event::create([
+            //this is using spread operator for remove array in request
+            ...$request->validate([
+                'name' => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'start_time' => 'required|date',
+                'end_time' => 'required|date|after:start_time' //this value after start_time
+            ]),
+            'user_id' => 1
+        ]);
+
+        return $event;
     }
 
     /**
