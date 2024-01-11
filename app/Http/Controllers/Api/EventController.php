@@ -39,7 +39,7 @@ class EventController extends Controller
                 'start_time' => 'required|date',
                 'end_time' => 'required|date|after:start_time' //this value after start_time
             ]),
-            'user_id' => 2
+            'user_id' => 1
         ]);
 
         // this is using API Resource for transform/custom data 
