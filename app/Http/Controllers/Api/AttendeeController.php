@@ -20,6 +20,7 @@ class AttendeeController extends Controller
     {
         //this protect every methods with middleware and connect to routes
         $this->middleware('auth:sanctum')->except(['index', 'show', 'update']);
+        $this->authorizeResource(Attendee::class, 'attendee');
     }
 
     /**
@@ -68,7 +69,7 @@ class AttendeeController extends Controller
      */
     public function destroy(Event $event, Attendee $attendee)
     {
-        Gate::authorize('delete-attendee', [$event, $attendee]);
+        // Gate::authorize('delete-attendee', [$event, $attendee]);
 
         $attendee->delete();
 

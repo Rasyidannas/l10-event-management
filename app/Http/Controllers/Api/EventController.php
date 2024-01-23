@@ -19,6 +19,7 @@ class EventController extends Controller
     {
         //this protect every methods with middleware and connect to routes
         $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->authorizeResource(Event::class, 'event');
     }
 
     /**
@@ -74,7 +75,7 @@ class EventController extends Controller
         // }
 
         //this is same like above but you need define in Gate at AuthServiceProvider
-        Gate::authorize('update-event', $event);
+        // Gate::authorize('update-event', $event);
 
         $event->update(
             $request->validate([
