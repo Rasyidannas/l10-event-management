@@ -19,6 +19,8 @@ class EventController extends Controller
     {
         //this protect every methods with middleware and connect to routes
         $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->middleware('throttle:api') //this is connect with api in RouteServiceProvider
+            ->only(['store', 'update', 'destroy']);
         $this->authorizeResource(Event::class, 'event');
     }
 

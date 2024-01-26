@@ -20,6 +20,8 @@ class AttendeeController extends Controller
     {
         //this protect every methods with middleware and connect to routes
         $this->middleware('auth:sanctum')->except(['index', 'show', 'update']);
+        $this->middleware('throttle:api') //this is connect with api in RouteServiceProvider
+            ->only(['store', 'destroy']);
         $this->authorizeResource(Attendee::class, 'attendee');
     }
 
@@ -42,7 +44,7 @@ class AttendeeController extends Controller
     {
         //this attendee will auto assign event
         $attendee = $this->loadRelationships($event->attendees()->create([
-            'user_id' => 1
+            'user_id' => $request->user()->id
         ]));
 
         return new AttendeeResource($attendee);
